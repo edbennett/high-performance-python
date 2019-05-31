@@ -1,5 +1,5 @@
 ---
-title: "Hardware and Software Design"
+title: "Hardware and software design"
 teaching: 20
 exercises: 5
 questions:
