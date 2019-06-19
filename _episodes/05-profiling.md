@@ -353,3 +353,90 @@ The main result we can see from this program is that `pycallgraph` has
 increased the run time by an order of magnitude compared to
 `cProfile`; this program isn't complicated enough to benefit from this
 detailed view of the call graph.
+
+
+## Using `timeit` for quick and dirty timings
+
+Sometimes you don't need a full profile; all you're interested in is
+how long one particular operation takes. While you could use the Unix
+`time` function to get this for you, Python provides a more precise
+alternative. The `timeit` module will run a particular expression or
+line of code repeatedly, to get a good estimate of how long it takes.
+This removes the overhead of starting Python from the problem.
+
+To use `timeit` at the command line, use `python -m timeit` followed
+by the expression you want to time. For example,
+
+~~~
+$ python -m timeit 'x = [i ** 2 for i in range(1000)]'
+~~~
+{: .language-bash}
+
+will measure how long it takes to calculate a particular list
+comprehension.
+
+> ## List comprehension?
+>
+> If you've not encountered a list comprehension before, this syntax
+> provides a one-line way to construct a list. The result is
+> equivalent to the loop:
+>
+> ~~~
+> x = []
+> for i in range(1000):
+>     x.append(i ** 2)
+> ~~~
+> {: .language-python}
+>
+> However, the list comprehension will normally be quicker.
+{: .callout}
+
+The output will tell you how many times Python ran the code to get an
+average:
+
+~~~
+1000 loops, best of 3: 265 usec per loop
+~~~
+{: .output}
+
+If you want to test an operation that involves a library function, you
+can import that library outside of the timed region. (Since normally
+you load libraries once at the start of a program, but use a function
+a lot, you are not normally interested in the load time of the
+library.) To do this, pass the operations to run before the timed
+region with the `--setup` option. For example, to look at the
+`metropolis` function from the Monte Carlo code above:
+
+~~~
+$ python -m timeit --setup 'import mc' 'mc.metropolis(1.0, 0.1, 1.0)'
+~~~
+{: .language-bash}
+
+> ## Comparing the loop with the list comprehension
+>
+> We asserted above that the list comprehension would be quicker than
+> the loop. But at the top of this episode we said that we should test
+> our assertions about performance, not rely on common wisdom. Check
+> how the run time of the loop version of the list comprehension code
+> compares.
+>
+> > ## Solution
+> >
+> > On my computer, the list comprehension takes 265 microseconds per
+> > iteration, while the loop takes 312 microseconds&mdash;a whopping
+> > 18% slower!
+> {: .solution}
+{: .challenge}
+
+> ## `timeit` magic in Jupyter notebooks
+>
+> You can use `timeit` within a Jupyter notebook to test the
+> performance of code you are writing there, too. Add the `%timeit`
+> magic to the top of a cell, and Jupyter will use the `timeit` module
+> to check its runtime.
+>
+> If you have Jupyter installed on your machine, open a new notebook
+> and try this now for the list comprehension and loop
+> comparison. Do the timings match up with what you see at the command
+> line?
+{: .challenge}
