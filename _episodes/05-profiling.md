@@ -431,9 +431,8 @@ $ python -m timeit --setup 'import mc' 'mc.metropolis(1.0, 0.1, 1.0)'
 > ## `timeit` magic in Jupyter notebooks
 >
 > You can use `timeit` within a Jupyter notebook to test the
-> performance of code you are writing there, too. Add the `%timeit`
-> magic to the top of a cell, and Jupyter will use the `timeit` module
-> to check its runtime.
+> performance of code you are writing there, too. In a new cell, use
+> `%timeit` followed by the function or expresion you want to time.
 >
 > If you have Jupyter installed on your machine, open a new notebook
 > and try this now for the list comprehension and loop
