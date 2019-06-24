@@ -115,7 +115,7 @@ Let's save this function in a file `dist.py`, and time it for some
 example 1000-element vectors.
 
 ~~~
-$ python -m timeit --setup='import dist; p = [i for i in range(1000)]; 
+$ python -m timeit --setup='import dist; p = [i for i in range(1000)]; \
     q = [i + 2 for i in range(1000)]' \
     'dist.naive_dist(p, q)'
 ~~~
@@ -147,8 +147,9 @@ data, but the performance should be the same no matter how the input
 data are generated, provided the data type is the same.
 
 ~~~
-$ python -m timeit --setup='import dist; p = np.arange(1000); 
-    q = np.arange(1000) + 2' 'dist.simple_numpy_dist(p, q)'
+$ python -m timeit --setup='import dist; import numpy as np; \
+    p = np.arange(1000); q = np.arange(1000) + 2' \
+    'dist.simple_numpy_dist(p, q)'
 ~~~
 {: .language-bash}
 
@@ -199,8 +200,8 @@ def naive_dists(ps, qs):
 Adjusting the timing code to create a list of lists now:
 
 ~~~
-$ python -m timeit --setup='import dist;
-    ps = [[i + 1000 * j for i in range(1000)] for j in range(1000)];
+$ python -m timeit --setup='import dist; \
+    ps = [[i + 1000 * j for i in range(1000)] for j in range(1000)]; \
     qs = [[i + 1000 * j + 2 for i in range(1000)] for j in range(1000)]' \
     'dist.naive_dists(ps, qs)'
 ~~~
@@ -235,13 +236,13 @@ element by element, it is more efficient to build it as a list, and
 then convert the list to an array with `np.asarray()`.
 
 ~~~
-$ python -m timeit --setup='import numpy as np; 
-    import dist; 
-    ps = np.asarray([[i + 1000 * j
-                      for i in range(1000)] 
-                     for j in range(1000)]);
-    qs = np.asarray([[i + 1000 * j + 2
-                      for i in range(1000)]
+$ python -m timeit --setup='import numpy as np; \
+    import dist; \
+    ps = np.asarray([[i + 1000 * j \
+                      for i in range(1000)] \
+                     for j in range(1000)]); \
+    qs = np.asarray([[i + 1000 * j + 2 \
+                      for i in range(1000)] \
                      for j in range(1000)])' \
     'dist.simple_numpy_dists(ps, qs)'
 ~~~
