@@ -249,3 +249,29 @@ root permissions.
 >
 > Once you've finished, switch back to the `scw_test` environment.
 {: .challenge}
+
+
+## Start an interactive session to test with
+
+For today, we're going to run a lot of short Python scripts directly
+at the terminal. Since it's bad practice to do this on the login node,
+but we don't want to write a job script for every test that we want to
+try, we will allocate an interactive session on a compute node.
+For running real problems, it is much better for you to use a batch
+script and submit it to the queue; we can only easily use interactive
+sessions today because we have reserved a set of nodes to use.
+
+~~~
+$ srun --ntasks=1 --cpus-per-task=10 --account=scw1389 --reservation=scw1389_18 --pty /bin/bash
+~~~
+{: .language-bash}
+
+Once we are logged into a compute node, we then need to reactivate the
+Conda environment that we are working in.
+
+~~~
+$ module load anaconda/2019.04
+$ source activate
+$ conda activate scw_test
+~~~
+{: .language-bash}
