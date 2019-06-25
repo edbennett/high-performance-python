@@ -275,3 +275,12 @@ $ source activate
 $ conda activate scw_test
 ~~~
 {: .language-bash}
+
+Finally, let's get a copy of the code we'll work with in some of the
+episodes later today.
+
+~~~
+$ cp -r /home/scw1389/high-performance-python/code high-performance-python-examples
+$ cd high-performance-python-examples
+~~~
+{: .language-bash
