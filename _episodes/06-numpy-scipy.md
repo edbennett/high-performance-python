@@ -391,6 +391,48 @@ express any other way without using explicit `for` loops.
 > You'll want to use `np.random.random` for your random numbers. Take
 > a look at the documentation for that function to see what arguments
 > it takes that will be helpful for this problem.
+>
+>> ## Solution
+>>
+>> Two possible solutions:
+>>
+>> ~~~
+>> import numpy as np
+>> 
+>> def numpy_pi_1(number_of_samples):
+>>     # Generate all of the random numbers at once to avoid loops
+>>     samples = np.random.random(size=(number_of_samples, 2))
+>>
+>>     # Use the same np.einsum trick that we used in the previous example
+>>     # Since we are comparing with 1, we don't need the square root
+>>     squared_distances = np.einsum('ij,ij->i', samples, samples)
+>> 
+>>     # Identify all instances of a distance below 1
+>>     # "Sum" the true elements to count them
+>>     within_circle_count = np.sum(squared_distances < 1)
+>> 
+>>     return within_circle_count / number_of_samples * 4
+>> 
+>> 
+>> def numpy_pi_2(number_of_samples):
+>>     within_circle_count = 0
+>> 
+>>     xs = np.random.random(size=number_of_samples)
+>>     ys = np.random.random(size=number_of_samples)
+>> 
+>>     r_squareds = xs ** 2 + ys ** 2
+>> 
+>>     within_circle_count = np.sum(r_squareds < 1)
+>> 
+>>     return within_circle_count / number_of_samples * 4
+>> ~~~
+>> {: .language-python}
+>>
+>> While these are competitive with each other in performance, which
+>> is the fastest depends on various factors. As always, test your
+>> own specific workloads and hardware setup to see how solutions
+>> perform on them.
+> {: .solution}
 {: .challenge}
 
 
