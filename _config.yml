@@ -29,7 +29,10 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "team@carpentries.org"
+email: "e.j.bennett@swansea.ac.uk"
+
+# SCW account
+scw_project: "scw1389"
 
 # Sites.
 amy_site: "https://amy.carpentries.org/workshops"
