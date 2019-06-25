@@ -17,8 +17,8 @@ and an SSH client.
   </p>
 
   <p>
-  If you already have attended previous training please contact us at
-  {{site.email}} and we will reactivate your membership in the training project.
+  If you already have previously attended the "Introduction to High Performance Computing" training, and so have already joined the "scw1389" project, please contact
+  {{site.email}} and we will reactivate your membership.
   </p>
   
   <p>
@@ -30,7 +30,7 @@ and an SSH client.
     Supercomputing Wales</a></li>
 	<li>Sign in with your Swansea University email and password</li>
 	<li>Fill in the form requesting a Supercomputing Wales
-    account. Your aaccount request will be processed by an
+    account. Your account request will be processed by an
     administrator.</li>
 	<li>Once you receive an email indicating that your account has been
     created, then revisit <a
