@@ -333,10 +333,10 @@ parallel="parallel --max-procs $SLURM_NTASKS --joblog parallel_joblog"
 # --joblog name     parallel's log file of tasks it has run
 
 # Run the tasks:
-$parallel "$srun python fourier_new.py {1}
-    --fourier_restricted_output=fourier_restricted_`basename {1}`.pdf
-    --noise_isolation_output=noise_isolation_`basename {1}`.pdf
-    --phase_contrast_output=phase_contrast_`basename {1}`.pdf" :::: files_to_process.txt
+$parallel "$srun python fourier_new.py {1} \
+    --fourier_restricted_output=fourier_restricted_\$(basename {1}).pdf \
+    --noise_isolation_output=noise_isolation_\$(basename {1}).pdf \
+    --phase_contrast_output=phase_contrast_\$(basename {1}).pdf" :::: files_to_process.txt
 ~~~
 {: .bash}
 
