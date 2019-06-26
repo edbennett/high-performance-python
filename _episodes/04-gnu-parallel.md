@@ -298,7 +298,7 @@ $ nano submit_fourier.sh
 #!/bin/bash --login
 ###
 # Number of processors we will use
-#SBATCH --ntasks 20
+#SBATCH --ntasks 10
 # Output file location
 #SBATCH --output fourier.out.%J
 # Time limit for this job
@@ -309,15 +309,15 @@ $ nano submit_fourier.sh
 # specify the reservation we have for the training workshop
 # remove this for your own work
 # replace XX with the code provided by your instructor
-#SBATCH --reservation=scw1389_XX
+#SBATCH --reservation=scw1389_18
 ###
 
 # Ensure that parallel is available to us
 module load parallel
 
 # Load Python and activate the environment we will use for this work
-module load anaconda
-conda activate tutorial
+module load anaconda/2019.03
+source activate scw_test
 
 # Only use one thread per copy of Python, since we are using GNU Parallel
 # for parallelism
@@ -334,9 +334,9 @@ parallel="parallel --max-procs $SLURM_NTASKS --joblog parallel_joblog"
 
 # Run the tasks:
 $parallel "$srun python fourier_new.py {1}
-    --fourier_restricted_output=fourier_restricted_{1}.pdf
-    --noise_isolation_output=noise_isolation_{1}.pdf
-    --phase_contrast_output=phase_contrast_{1}.pdf" :::: files_to_process.txt
+    --fourier_restricted_output=fourier_restricted_`basename {1}`.pdf
+    --noise_isolation_output=noise_isolation_`basename {1}`.pdf
+    --phase_contrast_output=phase_contrast_`basename {1}`.pdf" :::: files_to_process.txt
 ~~~
 {: .bash}
 
