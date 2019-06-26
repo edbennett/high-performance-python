@@ -270,7 +270,7 @@ Once we are logged into a compute node, we then need to reactivate the
 Conda environment that we are working in.
 
 ~~~
-$ module load anaconda/2019.04
+$ module load anaconda/2019.03
 $ source activate scw_test
 ~~~
 {: .language-bash}
