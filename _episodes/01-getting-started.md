@@ -271,8 +271,7 @@ Conda environment that we are working in.
 
 ~~~
 $ module load anaconda/2019.04
-$ source activate
-$ conda activate scw_test
+$ source activate scw_test
 ~~~
 {: .language-bash}
 
@@ -283,4 +282,4 @@ episodes later today.
 $ cp -r /home/scw1389/high-performance-python/code high-performance-python-examples
 $ cd high-performance-python-examples
 ~~~
-{: .language-bash
+{: .language-bash}
