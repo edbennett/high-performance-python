@@ -361,6 +361,8 @@ express any other way without using explicit `for` loops.
 > square, and counting the number that lie within the unit circle, we
 > can find an estimate for $\frac{\pi}{4}$, and by extension, $\pi$.
 >
+> ![A diagram illustrating the description above.](../fig/pi_dartboard.svg)
+>
 > A plain Python function that would achieve this might look as
 > follows:
 >

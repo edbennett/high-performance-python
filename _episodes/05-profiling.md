@@ -247,8 +247,11 @@ $ python -m cProfile -o mc.prof mc.py 0 1.0 0.1 1000000 mc.dat
 This will create a file called `mc.prof`, containing the profiling
 data. Now, since displaying graphics from the cluster on your own
 machine isn't always easy, instead we'll copy the profile to our local
-machine to view. This can be done with FileZilla, or at a Bash prompt
-with the command:
+machine to view. This can be done with FileZilla, or at a Bash prompt.
+
+
+To do this at the shell, open a new terminal (running on your own
+machine), and run the command:
 
 ~~~
 $ # This runs on your computer, not on the supercomputer
@@ -259,6 +262,7 @@ $ scp s.your.username@sunbird.swansea.ac.uk:hpp-examples/mc.prof ~/Desktop/
 Now we can install SnakeViz and visualise the profile:
 
 ~~~
+$ # This should also happen on your own computer
 $ pip install snakeviz
 $ snakeviz ~/Desktop/mc.prof
 ~~~
@@ -432,7 +436,9 @@ $ python -m timeit --setup 'import mc' 'mc.metropolis(1.0, 0.1, 1.0)'
 >
 > You can use `timeit` within a Jupyter notebook to test the
 > performance of code you are writing there, too. In a new cell, use
-> `%timeit` followed by the function or expresion you want to time.
+> `%timeit` followed by the function or expresion you want to time,
+> and use `%%timeit` at the top of a cell to time the execution of the
+> entire cell.
 >
 > If you have Jupyter installed on your machine, open a new notebook
 > and try this now for the list comprehension and loop

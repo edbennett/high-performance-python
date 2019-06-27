@@ -64,7 +64,7 @@ Parallel to be able to control.
 > will need to convert it to running as an independent Python script
 > in order to use GNU Parallel and command-line arguments. For more
 > information on this, see the
-> 
+> [Command-line arguments](http://swcarpentry.github.io/python-novice-inflammation/10-cmdline/)
 > episode of the Software Carpentry Python lesson.
 {: .callout}
 
@@ -81,7 +81,7 @@ see what it does:
 ~~~
 $ python fourier_orig.py
 ~~~
-{: .language-python}
+{: .language-bash}
 
 This should take a few seconds to run; use `ls -lrt` to see the most
 recently created files in the directory once it finishes to see what
@@ -268,7 +268,8 @@ carries out.
 With this done, we can test that the program still works, by running:
 
 ~~~
-$ python fourier_new.py --fourier_restricted_output=fourier_restricted.pdf \
+$ python fourier_new.py einstein1_7.jpg \
+      --fourier_restricted_output=fourier_restricted.pdf \
       --noise_isolation_output=noise_isolation.pdf \
       --phase_contrast_output=phase_contrast.pdf
 ~~~

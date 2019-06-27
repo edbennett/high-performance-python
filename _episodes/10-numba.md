@@ -235,6 +235,7 @@ def numpy_trig(a, b):
 
 ~~~
 $ python -m timeit --setup='import numpy as np; \
+    import trig; \
     a = np.random.random((1000, 1000)); \
 	b = np.random.random((1000, 1000))' \
 	'trig.vec_trig(a, b)'

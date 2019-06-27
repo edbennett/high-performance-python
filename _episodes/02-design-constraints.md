@@ -133,10 +133,10 @@ depending on the processor and data type, then 4, 8, or even 16
 iterations of this loop can happen at a single time.
 
 Compare the execution of a loop element-by-element sequentially:
-![An illustration of a loop happening sequentially](/fig/non-vector.svg)
+![An illustration of a loop happening sequentially](../fig/non-vector.svg)
 
 with the execution of a vectorised loop:
-![An illustration of a vectorised loop](/fig/vector.svg)
+![An illustration of a vectorised loop](../fig/vector.svg)
 
 The vectorised loop can be up to N times faster, where N is the number
 of elements that fit into the processor's vector units.

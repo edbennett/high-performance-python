@@ -27,6 +27,14 @@ tasks across more than one CPU. Pathos is a tool that extends this
 to work across multiple nodes, and provides other convenience
 improvements over Python's built-in tools.
 
+To start with, we need to install Pathos. 
+Pathos isn't installed as part of the standard Anaconda distribution;
+it can be installed from the `conda-forge` channel though.
+
+~~~
+$ conda install pathos
+~~~
+{: .language-bash}
 
 ## A toy example
 
@@ -67,7 +75,7 @@ that we have written ourselves.
 
 Before we can ask Pathos to run our code in parallel, we need to
 structure it in a way that Pathos can do this easily. This is
-a similar process process to the one  we used for accepting command-line
+a similar process to the one  we used for accepting command-line
 arguments; the difference is that now instead of using the `argparse`
 module and declaring the arguments that way, we declare a function
 that accepts the arguments in question. (It's good practice to do this
@@ -239,13 +247,36 @@ if __name__ == '__main__':
     hs = [0.25, 0.5, 1.0, 2.5]
     run_in_parallel(
         *zip(*product(betas, ms, hs)),
-        1000
+        10000
     )
 ~~~
 {: .language-python}
 
 Saving this as `mc_pathos_scan.py` and running it will now generate
 324 output files in the `mc_data` directory.
+
+> ## Verifying that it is parallel
+>
+> When Slurm is running a job on a particular node, it will let us SSH
+> directly to that note to check its behaviour. We can use this to
+> verify that we are running in parallel as we expect.
+>
+> Open a new terminal, and SSH to Sunbird again. Use `squeue -u $USER`
+> to find out what node your job is running on&mdash;this is the
+> right-most column. Then SSH into that node, using `ssh scsXXXX`,
+> where `XXXX` is replaced with the node number you got from `squeue`.
+>
+> Once running on the node, you can use the `top` command to get a
+> list of the processes using the most CPU resource, updating every
+> second. If your program is parallelising properly, you should see
+> multiple `python` processes, all consuming somewhere near 100%
+> CPU. (The percentages refer to a single CPU core rather than to the
+> available CPU in the machine as a whole.)
+>
+> If your job (or interactive allocation) ends while you're SSHed into
+> the node, then the SSH session will be killed by the system
+> automatically.
+{: .callout}
 
 > ## Processing file lists
 >
@@ -320,6 +351,19 @@ into many small tasks?
 While it is possible to start processes on more than one node using
 the Pathos library directly, this is easier to do using Pyina, which
 is another part of the Pathos framework.
+
+Since Pyina depends on MPI, it's not available via Conda (as the MPI
+installation will change from machine to machine). To install Pyina,
+we first need to choose an MPI library, and then install via Pip. On
+Sunbird, the first step can be done by loading the appropriate module.
+
+~~~
+$ # Get the latest version of the Intel MPI library
+$ module load mpi/intel/2019/4
+$ # Now install Pyina using this MPI library
+$ pip install pyina
+~~~
+{: .language-bash}
 
 It can be used very similarly to the Pathos library, by creating a
 process pool and then using a map function across that pool. The

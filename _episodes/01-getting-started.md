@@ -6,6 +6,9 @@ questions:
 - "How do I run Python on Supercomputing Wales?"
 - "How do I install packages and other Python software on
 Supercomputing Wales?"
+keypoints:
+- "Use `module load anaconda/2019.03` and `source activate` to get started with Anaconda on Sunbird"
+- "Create new conda environments with `conda create` when the `base` Anaconda set of packages doesn't meet your needs"
 ---
 
 Python is one of the most popular programming languages currently
@@ -228,8 +231,22 @@ root permissions.
 
 > ## More packages for today
 >
-> We'll also need the Matplotlib package for some of today's examples
-> Decide whether to install it via Conda or Pip, and install it.
+> We'll also need the IPython, Matplotlib, Numba, and Pillow packages 
+> for some of today's examples.
+> For each of these, decide whether to install it via Conda or Pip,
+> and install it.
+>
+> > ## Solution
+> >
+> > IPython, Matplotlib, Numba, and Pillow are all common packages, and all 
+> > are included in the base Anaconda distribution. They can be
+> > installed with
+> >
+> > ~~~
+> > $ conda install ipython matplotlib numba pillow
+> > ~~~
+> > {: .language-bash}
+> {: .solution}
 {: .challenge}
 
 > ## An environment for your research
