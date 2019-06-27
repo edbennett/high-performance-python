@@ -359,7 +359,7 @@ Sunbird, the first step can be done by loading the appropriate module.
 
 ~~~
 $ # Get the latest version of the Intel MPI library
-$ module load mpi/intel/2019/4
+$ module load mpi/intel/2019/3
 $ # Now install Pyina using this MPI library
 $ pip install pyina
 ~~~
