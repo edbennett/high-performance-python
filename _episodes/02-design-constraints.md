@@ -7,6 +7,21 @@ questions:
 might want?"
 - "What aspects of computer and supercomputer design allow us to work
 around this?"
+objectives:
+- "Understand why Python code often runs more slowly than equivalent
+code in other languages, so that these can be mitigated"
+- "Understand how high performance is typically obtained from
+programs on HPC facilities"
+keypoints:
+- "Python is an implicitly-typed, interpreted language, meaning that
+we must do work to overcome this to gain performance comparable to
+compiled, explicitly-typed languages."
+- "Python has a Global Interpreter Lock, which allows performant
+single-threaded code at the expense of multithreading performance"
+- "Typically, performance is gained from efficient use of available
+vector units, CPU cores, accelerators such as GPUs, and nodes. 
+We need to ensure that we don't accidentally stop our programs making
+use of these if we want to get optimal performance."
 ---
 
 ## Characteristics of Python
@@ -138,7 +153,7 @@ Compare the execution of a loop element-by-element sequentially:
 with the execution of a vectorised loop:
 ![An illustration of a vectorised loop](../fig/vector.svg)
 
-The vectorised loop can be up to N times faster, where N is the number
+The vectorised loop can be up to $N$ times faster, where $N$ is the number
 of elements that fit into the processor's vector units.
 
 Plain Python loops cannot be vectorised, since elements of a list aren't
