@@ -6,6 +6,20 @@ questions:
 - "How can I use Numpy to go faster on a single core?"
 - "To what extent can Numpy exploit multiple cores?"
 - "What can Scipy do to help in all this?"
+objectives:
+- "Understand how Numpy can give better performance than plain Python
+and when to use it"
+- "Be able to apply Numpy to multidimensional array problems"
+- "Understand when to look at Scipy for solutions"
+keypoints:
+- "Numpy provides datastructures for arbitrary-dimensional arrays
+of homogenous data"
+- "Whole-array operations are significantly faster than Python loops
+across arrays (or lists)"
+- "Scipy is very comprehensive; if you are doing something that someone
+has probable done before, then search to see if a library function
+exists before writing your own implementation, since it will
+probably be faster"
 ---
 
 Earlier this morning we discussed how one source of overhead in Python
