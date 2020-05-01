@@ -314,7 +314,7 @@ def main():
     run_test(client=client)
     end = datetime.now()
 
-    print("Time taken: {end - start}")
+    print(f"Time taken: {end - start}")
 
 
 if __name__ == '__main__':
@@ -323,5 +323,228 @@ if __name__ == '__main__':
 {: .language-python}
 
 
+## Parallel map with Dask
+
+Like Pathos, Dask also gives a way of performing independent parallel
+operations across all parallel threads. For example, consider a "sieve
+of Eratosthenes" for finding prime numbers. 
+
+~~~
+from time import sleep
+from random import random
+from datetime import datetime
+
+def slow_is_prime(num):
+    sleep(random())
+    if num == 1:
+        return False
+    for test_factor in range(2, num // 2):
+        if num % test_factor == 0:
+            return False
+
+    return True
+
+
+def main():
+    from argparse import ArgumentParser
+
+    parser = ArgumentParser()
+    parser.add_argument('min_num', type=int)
+    parser.add_argument('max_num', type=int)
+    args = parser.parse_args()
+
+    start_time = datetime.now()
+    num_primes = sum(map(slow_is_prime,
+                         range(args.min_num, args.max_num + 1)))
+    end_time = datetime.now()
+
+    print(f'{num_primes} primes between {args.min_num} and {args.max_num} '
+          f'[{end_time - start_time}]')
+
+
+if __name__ == '__main__':
+    main()
+~~~
+{: .language-python}
+
+Since a parallel map needs enough work for each iteration to make the
+parallelisation worthwhile, let's look at some relatively large
+numbers.
+
+~~~
+$ srun --partition=development --account=scw1000 --nodes=1 --ntasks=1 python primes_serial.py 100000000 100001000
+~~~
+{: .language-bash}
+
+~~~
+54 primes between 100000000 and 100001000 [0:10:25.173913]
+~~~
+{: .output}
+
+We can make this parallel across a single node using multiple workers,
+or we can go across multiple nodes using multiple threads per
+node.
+
+Firstly, using only a single node, the code is relatively unchanged:
+
+~~~
+from time import sleep
+from random import random
+from datetime import datetime
+
+from dask.distributed import Client
+
+def slow_is_prime(num):
+    sleep(random())
+    if num == 1:
+        return False
+    for test_factor in range(2, num // 2):
+        if num % test_factor == 0:
+            return False
+
+    return True
+
+
+def main():
+    from argparse import ArgumentParser
+
+    parser = ArgumentParser()
+    parser.add_argument('min_num', type=int)
+    parser.add_argument('max_num', type=int)
+    args = parser.parse_args()
+
+    client = Client(threads_per_worker=1, n_workers=40)
+
+    start_time = datetime.now()
+    num_primes = sum(
+        client.gather(
+            client.map(slow_is_prime,
+                       range(args.min_num, args.max_num + 1))
+        )
+    )
+    end_time = datetime.now()
+
+    print(f'{num_primes} primes between {args.min_num} and {args.max_num} '
+          f'[{end_time - start_time}]')
+
+
+if __name__ == '__main__':
+    main()
+~~~
+{: .language-python}
+
+The main change here is to create the `Client` object, and use that to
+perform a `map` followed by a `gather`. This is different to how `map`
+usually works (both in plain Python and in Pathos). In this case,
+rather than returning an iterator over the results of performing the
+computation, `Client.map()` returns a list of "futures". You can think
+of a future as being like a dry-cleaning ticket: the dry cleaner
+(`Client`) has agreed to clean the clothing (process a particular
+piece of data), but it's not ready yet&mdash;it could in a queue,
+be in the process of being washed (processed), or already be washed
+(processed) and ready for collection. You could sit and wait for it to
+complete, or you could take the ticket (future) and do some other
+useful work while the processing happens. Once you've run out of
+things to do, you can go back with the ticket (future) and collect the
+result if it's ready, or wait until it is otherwise. This is what the
+call to `Client.gather()` does&mdash;it lets Dask know that we would
+like the results of the list of computations that we previously got
+futures for. In principle, if there were some post-processing that we
+wanted to do on each result, we could get a subset of them at a time
+and process those while others completed, but in this case we only
+want to perform a summation, so we do the computational equivalent of
+handing over a stack of dry-cleaning and then sitting next to the
+reception desk until it is completed.
+
+~~~
+$ srun --partition=development --account=scw1000 --nodes=1 --ntasks=40
+--exclusive python primes_1node.py 100000000 100001000
+~~~
+{: .language-bash}
+
+~~~
+54 primes between 100000000 and 100001000 [0:00:19.193485]
+~~~
+{: .output}
+
+This gives us a 32x improvement in speed on 40 CPU cores&mdash;this is
+around 83% efficient. What about running across multiple nodes? This
+requires a few more changes to the code:
+
+~~~
+from os import environ
+from time import sleep
+from random import random
+from datetime import datetime
+
+from dask_mpi import initialize
+from distributed import Client
+
+
+def slow_is_prime(num):
+    sleep(random())
+    if num == 1:
+        return False
+    for test_factor in range(2, num // 2):
+        if num % test_factor == 0:
+            return False
+
+    return True
+
+
+def main():
+    from argparse import ArgumentParser
+
+    parser = ArgumentParser()
+    parser.add_argument('min_num', type=int)
+    parser.add_argument('max_num', type=int)
+    args = parser.parse_args()
+
+    num_threads = int(environ.get(
+        'SLURM_CPUS_PER_TASK',
+        environ.get('OMP_NUM_THREADS', 1)
+    ))
+    initialize(interface='ib0', nthreads=num_threads)
+    client = Client()
+
+    start_time = datetime.now()
+    num_primes = sum(
+        client.gather(
+            client.map(slow_is_prime,
+                       range(args.min_num, args.max_num + 1))
+        )
+    )
+    end_time = datetime.now()
+
+    print(f'{num_primes} primes between {args.min_num} and {args.max_num} '
+          f'[{end_time - start_time}]')
+
+
+if __name__ == '__main__':
+    main()
+~~~
+{: .language-python}
+
+The calls to `map` and `gather` are entirely unchanged&mdash;Dask
+tries to separate the "how you write your code" from "how it is
+parallelised", so the only thing that needs to change to enable this
+parallelisation is how the `Client` is created; in this case the setup
+is done by `dask_mpi`, so the call to `Client()` automatically spans
+the multiple nodes allocated to this computation. 
+
+Adjusting the batch script for the GridSearchCV example above to run
+this gives:
+
+~~~
+54 primes between 100000000 and 100001000 [0:00:13.191599]
+~~~
+{: .output}
+
+A 32% improvement on the one-node case, or a 47x speed improvement on
+the single-core version. This drops the efficiency to 60%, so there is
+either some difficulty with load balancing, or the overhead of
+managing multiple nodes is dominating over the time spend performing
+computations for this task. We could probe this by running for a
+larger search space.
 
 [scikit-learn example]: https://scikit-learn.org/stable/auto_examples/model_selection/plot_grid_search_digits.html#sphx-glr-auto-examples-model-selection-plot-grid-search-digits-py
