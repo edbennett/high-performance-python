@@ -294,9 +294,13 @@ script and submit it to the queue; we can only easily use interactive
 sessions today because we have reserved a set of nodes to use.
 
 ~~~
-$ srun --ntasks=1 --cpus-per-task=10 --account=scw1389 --reservation=scw1389_18 --pty /bin/bash
+$ srun --ntasks=1 --cpus-per-task=10 --account=scw1389 --reservation=scw1389_XX --pty /bin/bash
 ~~~
 {: .language-bash}
+
+Replace `XX` with the number provided by your instructor. (If you're
+following this training independently, then instead omit the `--reservation=scw1389_XX`
+part entirely, since you won't have a reservation available.)
 
 Once we are logged into a compute node, we then need to reactivate the
 Conda environment that we are working in.

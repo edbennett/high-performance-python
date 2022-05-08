@@ -310,7 +310,7 @@ $ nano submit_fourier.sh
 # specify the reservation we have for the training workshop
 # remove this for your own work
 # replace XX with the code provided by your instructor
-#SBATCH --reservation=scw1389_18
+#SBATCH --reservation=scw1389_XX
 ###
 
 # Ensure that parallel is available to us
