@@ -64,7 +64,7 @@ Parallel to be able to control.
 > will need to convert it to running as an independent Python script
 > in order to use GNU Parallel and command-line arguments. For more
 > information on this, see the
-> [Command-line arguments](http://swcarpentry.github.io/python-novice-inflammation/10-cmdline/)
+> [Command-line programs][shell-novice-cmdline]
 > episode of the Software Carpentry Python lesson.
 {: .callout}
 
@@ -404,3 +404,5 @@ files fill up your working directory.
 > parameters at once like this, beyond the computational resource and
 > time limits available on the machine.
 {: .challenge}
+
+[shell-novice-cmdline]: https://swcarpentry.github.io/python-novice-inflammation/12-cmdline/index.html
