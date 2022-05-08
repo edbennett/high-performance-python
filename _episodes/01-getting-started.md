@@ -7,7 +7,7 @@ questions:
 - "How do I install packages and other Python software on
 Supercomputing Wales?"
 keypoints:
-- "Use `module load anaconda/2019.03` and `source activate` to get started with Anaconda on Sunbird"
+- "Use `module load anaconda/2021.05` and `source activate` to get started with Anaconda on Sunbird"
 - "Create new conda environments with `conda create` when the `base` Anaconda set of packages doesn't meet your needs"
 ---
 
@@ -96,7 +96,7 @@ loads the Anaconda module, and the second activates it so that the
 commands provided by Conda are available in your current environment.
 
 ~~~
-$ module load anaconda/2019.03
+$ module load anaconda/2021.05
 $ source activate
 ~~~
 {: .language-bash}
@@ -111,12 +111,12 @@ $ which python
 {: .language-bash}
 
 ~~~
-/apps/local/languages/anaconda/2019.03/bin/python
+/apps/local/languages/anaconda/2021.05/bin/python
 ~~~
 {: .output}
 
 This indicates that when you run `python`, the executable that gets
-called is the one in `/apps/local/languages/anaconda/2019.03/bin`,
+called is the one in `/apps/local/languages/anaconda/2021.05/bin`,
 which is indeed the one provided by the Anaconda module.
 
 This module provides the full Anaconda toolchain, which, depending
@@ -287,7 +287,7 @@ Once we are logged into a compute node, we then need to reactivate the
 Conda environment that we are working in.
 
 ~~~
-$ module load anaconda/2019.03
+$ module load anaconda/2021.05
 $ source activate scw_test
 ~~~
 {: .language-bash}

@@ -81,7 +81,7 @@ right number of processes. Since we need to install extra packages, we
 first need to load the environment that we created earlier today.
 
 ~~~
-$ module load anaconda/2019.03
+$ module load anaconda/2021.05
 $ source activate scw_test
 ~~~
 {: .language-bash}
@@ -188,16 +188,16 @@ workload to the cluster looks like this:
 ###
 
 # Get MPI and Anaconda ready to use
-module load anaconda/2019.03 compiler/intel/2019/5 mpi/intel/2019/5
+module load anaconda/2021.05 compiler/intel/2019/5 mpi/intel/2019/5
 source activate scw_test
 
 # Get Slurm to run the Python program that uses Dask
 srun --overcommit \
      --distribution=cyclic \
-	 --nodes=${SLURM_NNODES} \
-	 --ntasks=$[SLURM_NTASKS+2] \
-	 --cpus-per-task=${SLURM_CPUS_PER_TASK} \
-	 python dasktest.py
+     --nodes=${SLURM_NNODES} \
+     --ntasks=$[SLURM_NTASKS+2] \
+     --cpus-per-task=${SLURM_CPUS_PER_TASK} \
+     python dasktest.py
 ~~~
 {: .bash}
 

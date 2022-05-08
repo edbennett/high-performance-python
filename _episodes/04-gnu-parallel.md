@@ -317,7 +317,7 @@ $ nano submit_fourier.sh
 module load parallel
 
 # Load Python and activate the environment we will use for this work
-module load anaconda/2019.03
+module load anaconda/2021.05
 source activate scw_test
 
 # Only use one thread per copy of Python, since we are using GNU Parallel
