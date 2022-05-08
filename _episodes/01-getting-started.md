@@ -229,6 +229,21 @@ $ pip install snakeviz
 SnakeViz will then install in the Conda environment, without needing
 root permissions.
 
+> ## Starting again
+>
+> If you build an environment up over time, adding package from different
+> sources, sometimes you will get to the point where Conda can no longer
+> work out how to install new packges as the installed versions start
+> to conflict with each other.
+>
+> The good thing about Conda environments (and other virtual environments)
+> is that we can treat environments as disposable. If we get into this
+> situation, then we can create a replacement environment from scratch,
+> with all the packages we need. We can leave the old environment in place
+> until the new one is working, and then delete it.
+{: .callout}
+
+
 > ## More packages for today
 >
 > We'll also need the IPython, Matplotlib, Numba, and Pillow packages 
