@@ -358,8 +358,67 @@ The changes that we have made:
   `goostats` script from the Sotware Carpentry shell lesson
 
 Set the reservation ID correctly (or remove it if you do not have a
-reservation) and submit this job, and you should see a collection of PDF
-files fill up your working directory.
+reservation) and submit this job.
+
+~~~
+$ sbatch submit_fourier.sh
+$ squeue -u $USER
+~~~
+{: .language-bash}
+
+~~~
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           7166510   compute submit_f s.e.j.be  R    0:00:14      1 scs0098
+~~~
+{: .output}
+
+Checking the queue status, we can see that this job is running. Once the program has
+had a few seconds to run, you should see a collection of PDF files fill up your
+working directory.
+
+~~~
+$ ls
+~~~
+{: .language-bash}
+
+~~~
+einstein1_7.jpg                                 noise_isolation_Hendrik_lorentz.jpg.pdf
+files_to_process.txt                            noise_isolation_Landau.jpg.pdf
+fourier_new.py                                  noise_isolation_Louis_de_Broglie.jpg.pdf
+fourier_orig.py                                 noise_isolation_Mariecurie.jpg.pdf
+fourier.out.7166510                             noise_isolation_Michael_Faraday_001.jpg.pdf
+fourier_restricted_Abdus_Salam.jpg.pdf          noise_isolation_Murray_Gell-Mann.png.pdf
+fourier_restricted_Bardeen.jpg.pdf              noise_isolation_Oppenheimer.jpg.pdf
+fourier_restricted_Bethe.jpg.pdf                noise_isolation.pdf
+fourier_restricted_Boltzmann.jpg.pdf            noise_isolation_Schrödinger.jpg.pdf
+fourier_restricted_Dirac_4.jpg.pdf              noise_isolation_Wigner.jpg.pdf
+fourier_restricted_Enrico_Fermi.jpg.pdf         out.gv
+fourier_restricted_Feynman.jpg.pdf              parallel_joblog
+fourier_restricted_Gauss.jpg.pdf                phase_contrast_Abdus_Salam.jpg.pdf
+fourier_restricted_Heisenberg_10.jpg.pdf        phase_contrast_Bardeen.jpg.pdf
+fourier_restricted_Hendrik_lorentz.jpg.pdf      phase_contrast_Bethe.jpg.pdf
+fourier_restricted_Landau.jpg.pdf               phase_contrast_Boltzmann.jpg.pdf
+fourier_restricted_Louis_de_Broglie.jpg.pdf     phase_contrast_Dirac_4.jpg.pdf
+fourier_restricted_Mariecurie.jpg.pdf           phase_contrast_Enrico_Fermi.jpg.pdf
+fourier_restricted_Michael_Faraday_001.jpg.pdf  phase_contrast_Feynman.jpg.pdf
+fourier_restricted_Murray_Gell-Mann.png.pdf     phase_contrast_Gauss.jpg.pdf
+fourier_restricted_Oppenheimer.jpg.pdf          phase_contrast_Heisenberg_10.jpg.pdf
+fourier_restricted.pdf                          phase_contrast_Hendrik_lorentz.jpg.pdf
+fourier_restricted_Schrödinger.jpg.pdf          phase_contrast_Landau.jpg.pdf
+fourier_restricted_Wigner.jpg.pdf               phase_contrast_Louis_de_Broglie.jpg.pdf
+mc.dat                                          phase_contrast_Mariecurie.jpg.pdf
+mc.py                                           phase_contrast_Michael_Faraday_001.jpg.pdf
+noise_isolation_Abdus_Salam.jpg.pdf             phase_contrast_Murray_Gell-Mann.png.pdf
+noise_isolation_Bardeen.jpg.pdf                 phase_contrast_Oppenheimer.jpg.pdf
+noise_isolation_Bethe.jpg.pdf                   phase_contrast.pdf
+noise_isolation_Boltzmann.jpg.pdf               phase_contrast_Schrödinger.jpg.pdf
+noise_isolation_Dirac_4.jpg.pdf                 phase_contrast_Wigner.jpg.pdf
+noise_isolation_Enrico_Fermi.jpg.pdf            __pycache__
+noise_isolation_Feynman.jpg.pdf                 solutions
+noise_isolation_Gauss.jpg.pdf                   submit_fourier.py
+noise_isolation_Heisenberg_10.jpg.pdf
+~~~
+{: .output}
 
 > ## Getting more parallel
 >
