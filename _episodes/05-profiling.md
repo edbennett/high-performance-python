@@ -362,7 +362,7 @@ $ python -m timeit --setup 'import mc' 'mc.metropolis(1.0, 0.1, 1.0)'
 >
 > You can use `timeit` within a Jupyter notebook to test the
 > performance of code you are writing there, too. In a new cell, use
-> `%timeit` followed by the function or expresion you want to time,
+> `%timeit` followed by the function or expression you want to time,
 > and use `%%timeit` at the top of a cell to time the execution of the
 > entire cell.
 >

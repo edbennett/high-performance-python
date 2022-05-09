@@ -169,7 +169,7 @@ Similarly, `which python` now returns
 `~/.conda/envs/scw_test/bin/python`, indicating that this is now
 where Python will run from if you run `python`.
 
-So far we have created a relatively bare environemnt, but we know that
+So far we have created a relatively bare environment, but we know that
 later today we will be using Numpy. So let's now install Numpy into
 this environment:
 
@@ -233,7 +233,7 @@ root permissions.
 >
 > If you build an environment up over time, adding package from different
 > sources, sometimes you will get to the point where Conda can no longer
-> work out how to install new packges as the installed versions start
+> work out how to install new packages as the installed versions start
 > to conflict with each other.
 >
 > The good thing about Conda environments (and other virtual environments)

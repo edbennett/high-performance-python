@@ -13,7 +13,7 @@ and when to use it"
 - "Understand when to look at Scipy for solutions"
 keypoints:
 - "Numpy provides datastructures for arbitrary-dimensional arrays
-of homogenous data"
+of homogeneous data"
 - "Whole-array operations are significantly faster than Python loops
 across arrays (or lists)"
 - "Scipy is very comprehensive; if you are doing something that someone
@@ -486,7 +486,7 @@ majority of the time, we don't want to write all of our software from
 scratch using the basic functions that Numpy provides, since getting
 the ideal performance from this would take considerable work. Instead,
 we would like to use an implementation that a group of talented
-developers ahve written and spent a lot of time optimising to run as
+developers have written and spent a lot of time optimising to run as
 fast as possible. This is what Scipy provides; built on top of Numpy,
 it interfaces with a wide range of C and Fortran libraries to provide
 a core of essential algorithms in scientific computing.
