@@ -131,7 +131,7 @@ $ conda create -n scw_test python=3.9
 {: .language-bash}
 
 This tells the `conda` command to `create` a new environment, to
-give it the name `scw_test`, and to install Python 3.7 into it.
+give it the name `scw_test`, and to install Python 3.9 into it.
 Conda will take a little time to work out what it needs to install,
 and once you confirm by typing `y`, then place it in a new directory
 in `~/.conda/envs`.
