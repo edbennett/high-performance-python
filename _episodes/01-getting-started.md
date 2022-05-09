@@ -126,7 +126,7 @@ then you'll need to create an environment to hold them. Let's do
 that now:
 
 ~~~
-$ conda create -n scw_test python=3.7
+$ conda create -n scw_test python=3.9
 ~~~
 {: .language-bash}
 
