@@ -255,7 +255,7 @@ machine), and run the command:
 
 ~~~
 $ # This runs on your computer, not on the supercomputer
-$ scp s.your.username@sunbird.swansea.ac.uk:hpp-examples/mc.prof ~/Desktop/
+$ scp s.your.username@sunbird.swansea.ac.uk:high-performance-python-examples/mc.prof ~/Desktop/
 ~~~
 {: .language-bash}
 
@@ -323,7 +323,7 @@ view using FileZilla, or with the command
 
 ~~~
 $ # This runs on your computer, not on the supercomputer
-$ scp s.your.username@sunbird.swansea.ac.uk:hpp-examples/pycallgraph.png ~/Desktop/
+$ scp s.your.username@sunbird.swansea.ac.uk:high-performance-python-examples/pycallgraph.png ~/Desktop/
 ~~~
 {: .language-bash}
 
